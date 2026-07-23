@@ -63,39 +63,43 @@ export default function SearchPanel({ onStart, running }) {
       </button>
 
       {open && (
-        <div className="mt-3 grid sm:grid-cols-3 gap-3 p-3 rounded-xl bg-black/20 border border-white/5">
-          <Field label="Related keywords" hint="max queries">
-            <input
-              type="number"
-              min="1"
-              max="15"
-              className="input"
-              value={opts.maxKeywords}
-              onChange={(e) => set('maxKeywords', +e.target.value)}
-            />
-          </Field>
-          <Field label="Results / keyword" hint="cap per query">
-            <input
-              type="number"
-              min="5"
-              max="300"
-              className="input"
-              value={opts.maxPerQuery}
-              onChange={(e) => set('maxPerQuery', +e.target.value)}
-            />
-          </Field>
-          <Field label="Concurrency" hint="parallel workers">
-            <input
-              type="number"
-              min="1"
-              max="10"
-              className="input"
-              value={opts.concurrency}
-              onChange={(e) => set('concurrency', +e.target.value)}
-            />
-          </Field>
-          <Toggle label="Live autocomplete" value={opts.autocomplete} onChange={(v) => set('autocomplete', v)} />
-          <Toggle label="Headless browser" value={opts.headless} onChange={(v) => set('headless', v)} />
+        <div className="mt-3 p-3 rounded-xl bg-black/20 border border-white/5 space-y-3">
+          <div className="grid grid-cols-3 gap-2.5">
+            <Field label="Keywords" hint="max queries">
+              <input
+                type="number"
+                min="1"
+                max="15"
+                className="input !px-2.5 text-center"
+                value={opts.maxKeywords}
+                onChange={(e) => set('maxKeywords', +e.target.value)}
+              />
+            </Field>
+            <Field label="Per query" hint="result cap">
+              <input
+                type="number"
+                min="5"
+                max="300"
+                className="input !px-2.5 text-center"
+                value={opts.maxPerQuery}
+                onChange={(e) => set('maxPerQuery', +e.target.value)}
+              />
+            </Field>
+            <Field label="Workers" hint="parallel">
+              <input
+                type="number"
+                min="1"
+                max="10"
+                className="input !px-2.5 text-center"
+                value={opts.concurrency}
+                onChange={(e) => set('concurrency', +e.target.value)}
+              />
+            </Field>
+          </div>
+          <div className="grid grid-cols-1 gap-2">
+            <Toggle label="Live autocomplete" value={opts.autocomplete} onChange={(v) => set('autocomplete', v)} />
+            <Toggle label="Headless browser" value={opts.headless} onChange={(v) => set('headless', v)} />
+          </div>
         </div>
       )}
 
