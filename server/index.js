@@ -106,6 +106,23 @@ io.on('connection', (socket) => {
   socket.emit('hello', { ok: true });
 });
 
-server.listen(PORT, () => {
-  console.log(`\n  LeadForge-AI server → http://localhost:${PORT}\n`);
-});
+/**
+ * Start the HTTP + Socket.io server. Pass `0` for an OS-assigned free port
+ * (used by the Electron desktop build so it never clashes with anything).
+ * Resolves with the actual port once listening.
+ */
+export function startServer(port = PORT) {
+  return new Promise((resolve) => {
+    server.listen(port, () => {
+      const actual = server.address().port;
+      console.log(`\n  LeadForge-AI server → http://localhost:${actual}\n`);
+      resolve({ server, io, port: actual });
+    });
+  });
+}
+
+// Auto-start only when run directly (`node index.js`), not when imported
+// (e.g. by the Electron main process, which calls startServer itself).
+const invokedDirectly =
+  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (invokedDirectly) startServer();
