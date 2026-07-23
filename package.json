@@ -9,7 +9,8 @@
     "dev": "concurrently -n server,client -c blue,magenta \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
     "build": "npm --prefix client run build",
     "start": "npm --prefix server start",
-    "serve": "npm run build && npm run start"
+    "serve": "npm run build && npm run start",
+    "autocommit": "node scripts/autocommit.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"

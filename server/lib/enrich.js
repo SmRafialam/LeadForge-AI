@@ -104,12 +104,24 @@ function extractSocials(html, baseUrl) {
   };
 }
 
+// Common page/section phrases that look like a two-word name but aren't.
+const NOT_A_NAME = new Set([
+  'contact us', 'about us', 'home page', 'privacy policy', 'terms conditions',
+  'read more', 'learn more', 'our team', 'get started', 'sign up', 'log in',
+  'follow us', 'social media', 'opening hours', 'book now', 'call now',
+]);
+
+function isLikelyName(s) {
+  return s && !NOT_A_NAME.has(s.toLowerCase());
+}
+
 function extractContactName(html) {
-  // Heuristic: look for schema.org founder/author, or "Owner:"/"Contact:" text.
-  const schema = html.match(/"(?:founder|author|name)"\s*:\s*"([A-Z][a-z]+ [A-Z][a-z]+)"/);
-  if (schema) return schema[1];
-  const labelled = html.match(/(?:Owner|Founder|Contact|Manager|CEO)\s*[:\-]\s*([A-Z][a-z]+ [A-Z][a-z]+)/);
-  if (labelled) return labelled[1];
+  // Heuristic: schema.org founder/author first, then labelled "Owner:" text.
+  // Prefer the founder/author fields over the generic page "name".
+  const authored = html.match(/"(?:founder|author)"\s*:\s*(?:{[^}]*?"name"\s*:\s*)?"([A-Z][a-z]+ [A-Z][a-z]+)"/);
+  if (authored && isLikelyName(authored[1])) return authored[1];
+  const labelled = html.match(/(?:Owner|Founder|Proprietor|Manager|CEO|Director)\s*[:\-]\s*([A-Z][a-z]+ [A-Z][a-z]+)/);
+  if (labelled && isLikelyName(labelled[1])) return labelled[1];
   return '';
 }
 
