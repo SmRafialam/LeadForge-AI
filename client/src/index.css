@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at 100% -10%, #0c5b4133, transparent),
+    radial-gradient(900px 500px at -10% 0%, #0a906133, transparent), #0a0f14;
+  color: #e6edf3;
+}
+
+/* Slim scrollbars for the data table. */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #2a3a4d;
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer components {
+  .card {
+    @apply bg-ink-800/70 border border-white/5 rounded-2xl backdrop-blur;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm transition disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 hover:bg-brand-400 text-ink-900 shadow-lg shadow-brand-500/20;
+  }
+  .btn-ghost {
+    @apply btn bg-white/5 hover:bg-white/10 text-white/80;
+  }
+  .input {
+    @apply w-full bg-ink-900/60 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-white/70 border border-white/10;
+  }
+}

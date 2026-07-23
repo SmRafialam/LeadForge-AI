@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+data/*.json
+data/exports/
+*.log
+.env
+.DS_Store
+.vite/
+playwright-report/
