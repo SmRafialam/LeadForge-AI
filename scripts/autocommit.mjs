@@ -19,7 +19,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const PUSH = !process.argv.includes('--no-push');
 const DEBOUNCE_MS = 4000;
-const IGNORE = /(^|[\\/])(node_modules|\.git|dist|build|data)([\\/]|$)/;
+const IGNORE = /(^|[\\/])(node_modules|\.git|dist|build|release|data)([\\/]|$)/;
 
 let timer = null;
 
