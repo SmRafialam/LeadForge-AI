@@ -133,7 +133,7 @@ export default function App() {
         </div>
 
         {/* Right column */}
-        <div className="flex flex-col gap-4 min-h-0">
+        <div className="flex flex-col gap-4 min-h-0 min-w-0">
           <StatCards leads={leads} />
           <ProgressPanel progress={progress} logs={logs} running={running} onCancel={cancel} />
           {activeJob || leads.length ? (
