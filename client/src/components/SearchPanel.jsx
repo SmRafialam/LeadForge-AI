@@ -112,11 +112,9 @@ export default function SearchPanel({ onStart, running }) {
 
 function Field({ label, hint, children }) {
   return (
-    <label className="block">
-      <div className="flex items-baseline justify-between mb-1">
-        <span className="text-xs font-semibold text-white/50">{label}</span>
-        <span className="text-[10px] text-white/25">{hint}</span>
-      </div>
+    <label className="block min-w-0">
+      <span className="block text-xs font-semibold text-white/60 leading-tight truncate">{label}</span>
+      <span className="block text-[10px] text-white/30 leading-tight mb-1.5 truncate">{hint}</span>
       {children}
     </label>
   );
@@ -124,7 +122,7 @@ function Field({ label, hint, children }) {
 
 function Toggle({ label, value, onChange }) {
   return (
-    <label className="flex items-center justify-between gap-2 px-3 rounded-xl bg-ink-900/60 border border-white/10 cursor-pointer">
+    <label className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-ink-900/60 border border-white/10 cursor-pointer">
       <span className="text-xs font-semibold text-white/60">{label}</span>
       <button
         type="button"
