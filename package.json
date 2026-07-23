@@ -3,16 +3,53 @@
   "version": "1.0.0",
   "private": true,
   "description": "LeadForge-AI — keyword-driven Google Maps lead scraper with website enrichment, live dashboard and sheet-wise export.",
+  "author": "SmRafialam",
   "type": "module",
+  "main": "electron/main.mjs",
   "scripts": {
     "setup": "npm install && npm --prefix server install && npm --prefix client install",
     "dev": "concurrently -n server,client -c blue,magenta \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
     "build": "npm --prefix client run build",
     "start": "npm --prefix server start",
     "serve": "npm run build && npm run start",
+    "app": "npm run build && electron .",
+    "app:nobuild": "electron .",
+    "dist": "npm run build && electron-builder --win portable",
+    "dist:installer": "npm run build && electron-builder --win nsis",
     "autocommit": "node scripts/autocommit.mjs"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.leadforge.ai",
+    "productName": "LeadForge-AI",
+    "asar": false,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "server/**/*",
+      "client/dist/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.mjs"
+    },
+    "win": {
+      "target": "portable",
+      "artifactName": "LeadForge-AI-${version}-portable.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "LeadForge-AI-${version}-setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "LeadForge-AI-${version}-portable.${ext}"
+    }
   }
 }
