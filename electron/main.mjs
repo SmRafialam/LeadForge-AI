@@ -23,6 +23,9 @@ let serverPort = null;
 
 async function ensureServer() {
   if (serverPort) return serverPort;
+  // Persist scraped data in a writable per-user folder so the app works even
+  // when installed to a read-only location (e.g. Program Files).
+  process.env.LEADFORGE_DATA_DIR = path.join(app.getPath('userData'), 'data');
   const { port } = await startServer(0); // 0 → OS picks a free port
   serverPort = port;
   return port;
