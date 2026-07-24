@@ -8,7 +8,7 @@
  *   npm run pack        →  release/LeadForge-AI-win32-x64/LeadForge-AI.exe
  */
 
-import packager from '@electron/packager';
+import { packager } from '@electron/packager';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
