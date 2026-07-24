@@ -42,6 +42,7 @@ async function main() {
     arch: 'x64',
     out: OUT_DIR,
     overwrite: true,
+    asar: false, // plain folder so we can strip root node_modules afterwards
     prune: false, // keep server/node_modules intact; we clean root below
     ignore: [
       /^[\\/]?release([\\/]|$)/,
