@@ -15,6 +15,9 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
+// Output outside OneDrive by default is recommended (OneDrive sync locks files
+// mid-build). Override with LEADFORGE_OUT; falls back to ./release.
+const OUT_DIR = process.env.LEADFORGE_OUT || path.join(ROOT, 'release');
 
 const rm = (p) => fs.rmSync(p, { recursive: true, force: true });
 const mb = (p) => {
