@@ -40,7 +40,7 @@ async function main() {
     name: 'LeadForge-AI',
     platform: 'win32',
     arch: 'x64',
-    out: path.join(ROOT, 'release'),
+    out: OUT_DIR,
     overwrite: true,
     prune: false, // keep server/node_modules intact; we clean root below
     ignore: [
