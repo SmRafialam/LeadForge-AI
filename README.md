@@ -74,6 +74,33 @@ Then open the dashboard, enter a keyword like `dentist` and a location like
 | Live autocomplete   | pull extra keywords from Google           | on      |
 | Headless browser    | run Chrome invisibly                      | on      |
 
+## 🖥️ Desktop app (.exe) — for demos / customers
+
+LeadForge ships as a **standalone Windows desktop app** (Electron) so you can
+hand it to a customer with no setup — double-click and it runs. The whole
+engine (server + scraper) runs locally inside the app, using the machine's
+installed Google Chrome. No cloud, no accounts, no internet dependency beyond
+the sites being scraped.
+
+```bash
+# Run it during development (opens a native window)
+npm run app
+
+# Build a distributable app folder (lean, ~300 MB)
+npm run pack
+#   → release/LeadForge-AI-win32-x64/LeadForge-AI.exe
+#   (build outside OneDrive to avoid sync locks: set LEADFORGE_OUT=C:\LeadForge-dist)
+```
+
+To share: zip the `LeadForge-AI-win32-x64` folder and send it — the customer
+unzips and runs `LeadForge-AI.exe`. **Requirement:** Google Chrome installed on
+that machine. Scraped data is saved per-user under
+`%APPDATA%/LeadForge-AI/data`, so it works even from a read-only location.
+
+> An installer (`.exe` setup) can be produced with `npm run dist:installer`, but
+> it needs Windows Developer Mode / admin (for electron-builder's signing
+> tooling). The `npm run pack` folder build has no such requirement.
+
 ## ⚠️ Notes
 
 - Scrapes **public business listings** for lead generation. Use responsibly and
