@@ -8,7 +8,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = path.join(__dirname, '..', '..', 'data');
+// In the desktop build the Electron main process points this at a writable
+// per-user folder (app.getPath('userData')); otherwise fall back to ./data.
+const DATA_DIR = process.env.LEADFORGE_DATA_DIR || path.join(__dirname, '..', '..', 'data');
 const JOBS_FILE = path.join(DATA_DIR, 'jobs.json');
 
 function ensure() {
